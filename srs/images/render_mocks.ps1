@@ -1,4 +1,4 @@
-﻿Add-Type -AssemblyName System.Drawing
+Add-Type -AssemblyName System.Drawing
 $outDir = Split-Path -Parent $MyInvocation.MyCommand.Path
 $bg = [System.Drawing.ColorTranslator]::FromHtml('#f4f6fb')
 $ink = [System.Drawing.ColorTranslator]::FromHtml('#20243a')
@@ -73,4 +73,3 @@ $c=NewCanvas 'Новая запись' 'Сегодня';$g=$c[1];Box $g 240 215 
 Label $g 278 282 'Тип записи' $small $muted;$types=@(@('Задача',278,100,$true),@('Событие',388,110,$false),@('Заметка',508,104,$false));foreach($t in $types){$fill=$white;$col=$muted;if($t[3]){$fill=[System.Drawing.ColorTranslator]::FromHtml('#eeeaff');$col=$purple};Box $g $t[1] 304 $t[2] 38 $fill 8 $line;Label $g ($t[1]+12) 314 $t[0] $small $col}
 $fields=@(@('Название','Например, подготовить отчёт'),@('Описание','Добавьте подробности'),@('Дата и время','26 октября 2026 · 14:00'),@('Напоминание','За 15 минут'));for($i=0;$i -lt $fields.Count;$i++){ $y=355+$i*57;Label $g 278 $y $fields[$i][0] $small $muted;Box $g 278 ($y+20) 642 34 ([System.Drawing.ColorTranslator]::FromHtml('#fbfbfe')) 7 $line;Label $g 292 ($y+25) $fields[$i][1] $small $muted}
 Box $g 680 610 105 38 $white 8 $line;Label $g 704 619 'Отмена' $small $muted;Box $g 800 610 120 38 $purple 8;Label $g 818 619 'Сохранить' $small $white;SaveCanvas $c '04-entry-form'
-
